@@ -60,4 +60,13 @@ describe("ChatBot", function () {
             expect(oChatBot.oWordCounts["pirate"].iCount).toEqual(1);
         });
     });
+
+    describe("acceptance test", function() {
+        const oChatBot = new ChatBot(10000, 3);
+
+        it("add 4 words", function() {
+            oChatBot.processMessage("User:hello hello bye jim jim hello good good");
+            expect(oChatBot._formMessage()).toEqual("good: 2 jim: 2 hello: 3");
+        });
+    });
 });

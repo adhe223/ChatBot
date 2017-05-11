@@ -8,6 +8,7 @@ MinHeap.prototype.size = function() {
 };
 
 MinHeap.prototype.push = function(elem) {
+    // Add and bubble the element to its proper place
     this.aValues.push(elem);
     this._bubbleUp(this.aValues.length - 1);
 };
@@ -16,6 +17,7 @@ MinHeap.prototype.pop = function() {
     const resElem = this.aValues[0];
     const endElem = this.aValues.pop();
 
+    // If there are elements remaining, place the end at the start and sink down to place
     if (this.aValues.length) {
         this.aValues[0] = endElem;
         this._sinkDown(0);
@@ -30,6 +32,7 @@ MinHeap.prototype.peek = function() {
 
 MinHeap.prototype.remove = function(elem) {
     let endElem;
+    let iLength = this.aValues.length;
 
     for (let i = 0; i < this.aValues.length; i++) {
         if (this.aValues[i] !== elem) {
@@ -39,7 +42,7 @@ MinHeap.prototype.remove = function(elem) {
         endElem = this.aValues.pop();
 
         // If the last element was the one to be removed, we don't need to continue
-        if (i === this.aValues.length - 1) {
+        if (i === iLength - 1) {
             break;
         }
 
@@ -58,6 +61,7 @@ MinHeap.prototype._bubbleUp = function(i) {
         iParentIndx = this._getParentIndx(i);
         parentElem = this.aValues[iParentIndx];
 
+        // If the parent is less, we are done here
         if (this.fnScorer(parentElem) < this.fnScorer(elem)) {
             break;
         }
@@ -79,6 +83,7 @@ MinHeap.prototype._sinkDown = function(i) {
         iFirstChildIndx = aChildren[0];
         iSecondChildIndx = aChildren[1];
 
+        // If the first child exists, score it and see if we need to swap
         if (iFirstChildIndx < this.aValues.length) {
             firstChildElem = this.aValues[iFirstChildIndx];
 
