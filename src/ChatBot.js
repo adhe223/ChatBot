@@ -25,7 +25,7 @@ function ChatBot(iMessageInterval, iTopWordCount) {
     this.iMessageTimer = setInterval(this.messageRoom, this.iMessageInterval);
 
     // Attach listener
-    //ChatClient.onReceiveMessage(this.processMessage.bind(this));
+    ChatClient.onReceiveMessage(this.processMessage);
 }
 
 ChatBot.prototype.messageRoom = function() {
@@ -55,6 +55,7 @@ ChatBot.prototype.shutDown = function() {
 
 // Handle the adding of words to our data structure. Using a mix of a Hashmap and Min Heap.
 ChatBot.prototype._addWord = function(strWord) {
+    console.log('Add word!');
     let oWordCount;
 
     if (this.oWordCounts[strWord]) {
@@ -78,6 +79,7 @@ ChatBot.prototype._addWord = function(strWord) {
         this.oMinHeap.push(oWordCount);
     } else {
         // Check if the count is less than the current minimum of the top 10 values
+        console.log('in else ' + strWord);
         if (this.oMinHeap.peek().iCount < oWordCount.iCount) {
             // Remove min
             this.oMinHeap.pop().bInHeap = false;

@@ -64,7 +64,8 @@ describe("ChatBot", function () {
     describe("acceptance test", function() {
         const oChatBot = new ChatBot(10000, 3);
 
-        it("add 4 words", function() {
+        it("returns the most said three words given 4 words added", function() {
+            console.log('hi');
             oChatBot.processMessage("User:hello hello bye jim jim hello good good");
             expect(oChatBot._formMessage()).toEqual("good: 2 jim: 2 hello: 3");
         });
